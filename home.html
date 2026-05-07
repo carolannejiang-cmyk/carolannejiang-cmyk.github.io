@@ -20,11 +20,6 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      cursor: url('cursor.png'), auto;
-    }
-
-    a, summary, button {
-      cursor: url('cursor.png'), pointer;
     }
 
     .page {
@@ -166,21 +161,6 @@
       letter-spacing: 0.01em;
     }
 
-    /* Blinking cursor */
-    .cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1.1em;
-      background-color: #555;
-      margin-left: 2px;
-      vertical-align: middle;
-      animation: blink 1.1s step-start infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0; }
-    }
   </style>
 </head>
 <body>
@@ -192,7 +172,7 @@
   <div class="page">
 
     <p class="intro">
-      Hi! I'm Carolanne, currently studying philosophy at the University of
+      Hi! I'm Carolanne Jiang, an undergraduate student at the University of
       Chicago. I am interested in AI Safety, philosophy, citizen science, and
       doing good the most effectively.
     </p>
@@ -209,17 +189,10 @@
       </details>
 
       <details class="nav-item">
-        <summary>Reading</summary>
-        <div class="nav-content">
-          Coming soon.
-        </div>
-      </details>
-
-      <details class="nav-item">
         <summary>Contacts</summary>
         <div class="nav-content">
           ctjiang@uchicago.edu
-          <br><a href="https://calendly.com/carolannejiang/30min">Chat with me about anything</a>
+          <br><a href="https://savvycal.com/carolanne">Chat with me about anything</a>
         </div>
       </details>
 
@@ -237,7 +210,6 @@
       <a href="on-education.html" style="color: #aaa; text-decoration: underline; text-underline-offset: 3px;">On Education</a>
       &nbsp;&middot;&nbsp;
       <a href="https://www.brasstacks.blog/solution-production/" style="color: #aaa; text-decoration: underline; text-underline-offset: 3px;">Solution Production</a>
-      <span class="cursor"></span>
     </div>
 
   </div>
