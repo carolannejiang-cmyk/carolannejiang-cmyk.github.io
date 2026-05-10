@@ -6,6 +6,9 @@
   <title>Carolanne</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -15,16 +18,11 @@
 
     body {
       background-color: #ffffff;
-      font-family: 'Bell MT', 'Bell', Georgia, serif;
+      font-family: 'Source Serif Pro', Georgia, serif;
       color: #1a1a1a;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      cursor: url('cursor.png'), auto;
-    }
-
-    a, summary, button {
-      cursor: url('cursor.png'), pointer;
     }
 
     .page {
@@ -166,21 +164,6 @@
       letter-spacing: 0.01em;
     }
 
-    /* Blinking cursor */
-    .cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1.1em;
-      background-color: #555;
-      margin-left: 2px;
-      vertical-align: middle;
-      animation: blink 1.1s step-start infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0; }
-    }
   </style>
 </head>
 <body>
@@ -192,26 +175,19 @@
   <div class="page">
 
     <p class="intro">
-      Hi! I'm Carolanne, currently studying philosophy at the University of
+      Hi! I'm Carolanne, an undergraduate student at the University of
       Chicago. I am interested in AI Safety, philosophy, citizen science, and
-      effective altruism.
+      doing good the most effectively.
     </p>
 
     <nav>
       <p class="nav-label"><strong>Navigation:</strong></p>
 
       <details class="nav-item">
-        <summary>My writing</summary>
+        <summary>What am I working on?</summary>
         <div class="nav-content">
-          Here is my <a href="https://substack.com/@carolannejiang">substack</a>
-          <br>Sometimes I also <a href="art.html">paint</a>
-        </div>
-      </details>
-
-      <details class="nav-item">
-        <summary>Reading</summary>
-        <div class="nav-content">
-          Coming soon.
+          Currently I am on leave from university, working as the organizer of <a href="https://manifest.is">Manifest</a>—a festival/conference on prediction markets &amp; forecasting.
+          <br>Sometimes I blog <a href="https://substack.com/@carolannejiang">here</a>, and in another world I might have been a <a href="paintings.html">painter</a>.
         </div>
       </details>
 
@@ -219,7 +195,7 @@
         <summary>Contacts</summary>
         <div class="nav-content">
           ctjiang@uchicago.edu
-          <br><a href="https://calendar.app.google/zBzwzVA7UdA86X8p6">Chat with me about anything</a>
+          <br><a href="https://savvycal.com/carolanne">Chat with me about anything</a>
         </div>
       </details>
 
@@ -232,8 +208,11 @@
     </nav>
 
     <div class="footer-quote">
-      This is the best of all possible worlds, and everything in it is a necessary evil.
-      <span class="cursor"></span>
+      <a href="short-talk.html" style="color: #aaa; text-decoration: underline; text-underline-offset: 3px;">Short Talk on Major and Minor</a>
+      &nbsp;&middot;&nbsp;
+      <a href="on-education.html" style="color: #aaa; text-decoration: underline; text-underline-offset: 3px;">On Education</a>
+      &nbsp;&middot;&nbsp;
+      <a href="https://www.brasstacks.blog/solution-production/" style="color: #aaa; text-decoration: underline; text-underline-offset: 3px;">Solution Production</a>
     </div>
 
   </div>
