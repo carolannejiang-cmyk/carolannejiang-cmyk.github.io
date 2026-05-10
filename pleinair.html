@@ -28,27 +28,142 @@
       transition: color 0.2s;
     }
     .back-link:hover { color: #000; }
-    .gallery {
-      max-width: 900px;
-      margin: 0 auto;
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 60px;
       padding: 20px 24px 80px;
+      user-select: none;
     }
-    .gallery h1 {
-      font-size: 1.5rem;
+    .slideshow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+    }
+    .stage {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      aspect-ratio: 3 / 2;
+      cursor: pointer;
+    }
+    .stage img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .stage img.active { opacity: 1; }
+    .counter {
+      font-size: 0.85rem;
+      color: #777;
+      letter-spacing: 0.05em;
+    }
+    .caption {
+      font-size: 0.9rem;
+      color: #555;
+      text-align: center;
+      letter-spacing: 0.02em;
+      min-height: 1.2em;
+    }
+    .slideshow-title {
+      font-size: 1rem;
       font-weight: 700;
-      margin-bottom: 40px;
+      color: #111;
+      text-align: center;
+      letter-spacing: 0.02em;
     }
-    .placeholder {
-      color: #888;
-      font-style: italic;
+    @media (max-width: 600px) {
+      .container { gap: 40px; padding: 12px 16px 40px; }
     }
   </style>
 </head>
 <body>
   <a href="index.html" class="back-link">← back</a>
-  <div class="gallery">
-    <h1>Pleinair &amp; Other memories</h1>
-    <p class="placeholder">Coming soon.</p>
+  <div class="container">
+
+    <div class="slideshow">
+      <div class="stage">
+        <img src="images/pleinair/_R002058.jpg" alt="" class="active" data-caption="Karl-Marx-Straße, Berlin, 2025">
+        <img src="images/pleinair/IMG_0871.jpg" alt="" loading="lazy" data-caption="Treptower Park, Berlin, 2025">
+        <img src="images/pleinair/IMG_1884.jpg" alt="" loading="lazy" data-caption="Karl-Marx-Straße, Berlin, 2025">
+        <img src="images/pleinair/IMG_2429.jpg" alt="" loading="lazy" data-caption="Prague 1, 2025">
+        <img src="images/pleinair/IMG_2529.jpg" alt="" loading="lazy" data-caption="Natural History Museum, Vienna, 2025">
+        <img src="images/pleinair/IMG_2535.jpg" alt="" loading="lazy" data-caption="Natural History Museum, Vienna, 2025">
+        <img src="images/pleinair/IMG_2582.jpg" alt="" loading="lazy" data-caption="Bratislava, 2025">
+      </div>
+      <div class="caption">Karl-Marx-Straße, Berlin, 2025</div>
+      <div class="counter">1 / 7</div>
+    </div>
+
+    <div class="slideshow">
+      <div class="stage">
+        <img src="images/memories/m1.jpg" alt="" class="active" loading="lazy" data-caption="Florence, 2023">
+        <img src="images/memories/m2.jpg" alt="" loading="lazy" data-caption="Florence, 2023">
+        <img src="images/memories/m3.jpg" alt="" loading="lazy" data-caption="Florence, 2023">
+        <img src="images/memories/m4.jpg" alt="" loading="lazy" data-caption="Florence, 2023">
+        <img src="images/memories/m5.jpg" alt="" loading="lazy" data-caption="Florence, 2023">
+        <img src="images/memories/m6.jpg" alt="" loading="lazy" data-caption="Florence, 2023">
+        <img src="images/memories/m7.jpg" alt="" loading="lazy" data-caption="Florence, 2023">
+        <img src="images/memories/m8.jpg" alt="" loading="lazy" data-caption="Florence, 2023">
+        <img src="images/memories/m9.jpg" alt="" loading="lazy" data-caption="Florence, 2023">
+      </div>
+      <div class="caption">Florence, 2023</div>
+      <div class="counter">1 / 9</div>
+    </div>
+
+    <div class="slideshow">
+      <div class="stage">
+        <img src="images/students/s01.jpg" alt="" class="active" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s02.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s03.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s04.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s05.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s06.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s07.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s08.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s09.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s10.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s11.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s12.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s13.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s14.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s15.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s16.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s17.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s18.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s19.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s20.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+        <img src="images/students/s21.jpg" alt="" loading="lazy" data-caption="Paintings from various students">
+      </div>
+      <div class="caption">Paintings from various students</div>
+      <div class="counter">1 / 21</div>
+    </div>
+
   </div>
+  <script>
+    document.querySelectorAll('.slideshow').forEach((show) => {
+      const stage = show.querySelector('.stage');
+      const counter = show.querySelector('.counter');
+      const caption = show.querySelector('.caption');
+      const slides = stage.querySelectorAll('img');
+      if (!slides.length) return;
+      let i = 0;
+      const update = (idx) => {
+        slides[i].classList.remove('active');
+        i = (idx + slides.length) % slides.length;
+        slides[i].classList.add('active');
+        counter.textContent = (i + 1) + ' / ' + slides.length;
+        caption.textContent = slides[i].dataset.caption || '';
+      };
+      stage.addEventListener('click', () => update(i + 1));
+    });
+  </script>
 </body>
 </html>
