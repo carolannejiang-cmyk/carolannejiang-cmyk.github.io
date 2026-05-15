@@ -58,22 +58,73 @@
     }
 
     /* Main content */
+    .hero {
+      margin: 6vh 0 0;
+      max-width: 460px;
+      width: 100%;
+      position: relative;
+    }
+    .hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .hero-caption {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      padding: 14px 16px;
+      background: rgba(0, 0, 0, 0.55);
+      color: #fff;
+      font-size: 0.72rem;
+      line-height: 1.45;
+      letter-spacing: 0.01em;
+      white-space: pre-line;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .hero:hover .hero-caption:not(:empty) {
+      opacity: 1;
+    }
+    .hero-clock {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      color: #fff;
+      font-size: 0.72rem;
+      letter-spacing: 0.02em;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .hero:hover .hero-clock {
+      opacity: 1;
+    }
     .intro {
-      margin-top: 22vh;
-      font-size: 0.92rem;
+      margin-top: 24px;
+      font-size: 0.82rem;
       line-height: 1.75;
       color: #1a1a1a;
-      max-width: 560px;
+      max-width: 460px;
     }
 
     .intro a {
-      color: #7DC8F7;
+      color: #888;
       text-decoration: underline;
       text-underline-offset: 3px;
     }
 
     .intro a:hover {
-      color: #4FA8DC;
+      color: #555;
     }
 
     /* Navigation */
@@ -82,7 +133,7 @@
     }
 
     nav p.nav-label {
-      font-size: 0.92rem;
+      font-size: 0.82rem;
       color: #1a1a1a;
       margin-bottom: 10px;
     }
@@ -97,7 +148,7 @@
     }
 
     nav ul li a {
-      font-size: 0.92rem;
+      font-size: 0.82rem;
       color: #1a1a1a;
       text-decoration: none;
       line-height: 1.9;
@@ -111,7 +162,7 @@
 
     /* Collapsible nav items */
     .nav-item summary {
-      font-size: 0.92rem;
+      font-size: 0.82rem;
       color: #1a1a1a;
       cursor: pointer;
       line-height: 1.9;
@@ -142,20 +193,20 @@
     }
 
     .nav-content {
-      padding: 6px 0 10px 18px;
-      font-size: 0.85rem;
+      padding: 6px 0 10px 0;
+      font-size: 0.82rem;
       line-height: 1.7;
       color: #444;
     }
 
     .nav-content a {
-      color: #7DC8F7;
+      color: #888;
       text-decoration: underline;
       text-underline-offset: 3px;
     }
 
     .nav-content a:hover {
-      color: #4FA8DC;
+      color: #555;
     }
 
     /* Footer quote */
@@ -179,9 +230,69 @@
 
   <div class="page">
 
+    <div class="hero">
+      <div class="hero-clock" id="hero-clock"></div>
+      <img id="hero-img" src="images/hero/default.jpg" alt="">
+      <div class="hero-caption" id="hero-caption"></div>
+    </div>
+    <script>
+      (function () {
+        const captions = {
+          'default': "Agnes Martin\nUntitled, 1959\nOil and graphite on canvas\n12 1/8 x 23 7/8 in (30.8 x 60.6 cm)",
+          'hockney-23-03': "David Hockney\nfrom The Moon Room Series, 2020\niPad painting printed on paper, mounted on Dibond\nEdition of 15\n70 × 100 cm\n© David Hockney",
+          'webster-03-04': "Emma Webster\nThe Rehearsal (Harvest Moon) (2023)\n60 x 84 in\nOil on linen",
+          'lee-04-05': "Sarah Lee\nThe Night Stars Fell, 2022\nOil on canvas\n55 x 50 in",
+          'hockney-13-15': "David Hockney\nA Year in Normandie (detail), 2020–2021\nComposite iPad painting, printed on paper",
+          'hockney-15-16': "David Hockney\nA Year in Normandie (detail), 2020–2021\nComposite iPad painting, printed on paper\n© David Hockney",
+          'lihei-19-21': "Li Hei Di\nGapes at the vanity of toil (section), 2025\nOil on canvas\n74-13/16\" × 66-15/16\" (190 cm × 170 cm)\n© Li Hei Di",
+          'martin-08-11': "Agnes Martin\nUntitled, 1998\nLithograph on Gilclear Light paper\n4 7/10 × 4 7/10 in | 12 × 12 cm\nEdition of 75",
+          'bennett-16-19': "Amy Bennett\nNight Gardening, 2022\nOil on panel\n16 x 20 in"
+        };
+        const widthOverrides = { 'lee-04-05': 450 };
+
+        function pickKey(h) {
+          if (h >= 23 || h < 3) return 'hockney-23-03';
+          if (h >= 3 && h < 4) return 'webster-03-04';
+          if (h >= 4 && h < 5) return 'lee-04-05';
+          if (h >= 8 && h < 11) return 'martin-08-11';
+          if (h >= 13 && h < 15) return 'hockney-13-15';
+          if (h >= 15 && h < 16) return 'hockney-15-16';
+          if (h >= 16 && h < 19) return 'bennett-16-19';
+          if (h >= 19 && h < 21) return 'lihei-19-21';
+          return 'default';
+        }
+
+        function applySlot(key) {
+          document.getElementById('hero-img').src = 'images/hero/' + key + '.jpg';
+          document.getElementById('hero-caption').textContent = captions[key] || '';
+          document.querySelector('.hero').style.maxWidth = (widthOverrides[key] || 460) + 'px';
+        }
+
+        const forced = new URLSearchParams(location.search).get('slot');
+        const initialH = new Date().getHours();
+        let key = pickKey(initialH);
+        if (forced && captions.hasOwnProperty(forced)) key = forced;
+        applySlot(key);
+
+        const clockEl = document.getElementById('hero-clock');
+        function tick() {
+          const d = new Date();
+          let hh = d.getHours();
+          const ampm = hh >= 12 ? 'PM' : 'AM';
+          hh = hh % 12 || 12;
+          const mm = String(d.getMinutes()).padStart(2, '0');
+          const ss = String(d.getSeconds()).padStart(2, '0');
+          clockEl.textContent = String(hh).padStart(2, '0') + ':' + mm + ':' + ss + ' ' + ampm;
+        }
+        tick();
+        setInterval(tick, 1000);
+
+      })();
+    </script>
+
     <p class="intro">
-      Hi! I'm Carolanne, an undergraduate student studying philosophy at the
-      University of Chicago.
+      Hi! I'm Carolanne, an undergraduate student studying philosophy<br>
+      at the University of Chicago.
     </p>
 
     <nav>
@@ -206,11 +317,11 @@
     </nav>
 
     <div class="footer-quote">
-      <a href="short-talk.html" style="color: #7DC8F7; text-decoration: underline; text-underline-offset: 3px;">Short Talk on Major and Minor</a>
+      <a href="short-talk.html" style="color: #888; text-decoration: underline; text-underline-offset: 3px;">Short Talk on Major and Minor</a>
       &nbsp;&middot;&nbsp;
-      <a href="on-education.html" style="color: #7DC8F7; text-decoration: underline; text-underline-offset: 3px;">On Education</a>
+      <a href="on-education.html" style="color: #888; text-decoration: underline; text-underline-offset: 3px;">On Education</a>
       &nbsp;&middot;&nbsp;
-      <a href="https://www.brasstacks.blog/solution-production/" style="color: #7DC8F7; text-decoration: underline; text-underline-offset: 3px;">Solution Production</a>
+      <a href="https://www.brasstacks.blog/solution-production/" style="color: #888; text-decoration: underline; text-underline-offset: 3px;">Solution Production</a>
     </div>
 
   </div>
