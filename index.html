@@ -4,11 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Carolanne</title>
+  <meta name="description" content="Carolanne Jiang — undergraduate at the University of Chicago studying philosophy, currently organizing Manifest, a festival on prediction markets and forecasting.">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <script>
+    (function () {
+      var h = new Date().getHours();
+      var key;
+      if (h >= 23 || h < 3) key = 'hockney-23-03';
+      else if (h >= 3 && h < 4) key = 'webster-03-04';
+      else if (h >= 4 && h < 5) key = 'lee-04-05';
+      else if (h >= 8 && h < 11) key = 'martin-08-11';
+      else if (h >= 13 && h < 15) key = 'hockney-13-15';
+      else if (h >= 15 && h < 16) key = 'hockney-15-16';
+      else if (h >= 16 && h < 19) key = 'bennett-16-19';
+      else if (h >= 19 && h < 21) key = 'lihei-19-21';
+      else key = 'default';
+      try {
+        var params = new URLSearchParams(location.search);
+        var forced = params.get('slot');
+        if (forced) key = forced;
+      } catch (e) {}
+      window.__heroKey = key;
+      var link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = 'images/hero/' + key + '.webp';
+      link.type = 'image/webp';
+      link.setAttribute('fetchpriority', 'high');
+      document.head.appendChild(link);
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"></noscript>
   <style>
     * {
       margin: 0;
@@ -118,13 +149,13 @@
     }
 
     .intro a {
-      color: #888;
+      color: #595959;
       text-decoration: underline;
       text-underline-offset: 3px;
     }
 
     .intro a:hover {
-      color: #555;
+      color: #2a2a2a;
     }
 
     /* Navigation */
@@ -200,13 +231,13 @@
     }
 
     .nav-content a {
-      color: #888;
+      color: #595959;
       text-decoration: underline;
       text-underline-offset: 3px;
     }
 
     .nav-content a:hover {
-      color: #555;
+      color: #2a2a2a;
     }
 
     /* Footer quote */
@@ -215,10 +246,11 @@
       padding-bottom: 60px;
       padding-top: 80px;
       font-size: 0.7rem;
-      color: #aaa;
+      color: #595959;
       font-style: normal;
       letter-spacing: 0.01em;
     }
+    .footer-quote a { color: #595959; }
 
     @media (max-width: 600px) {
       .page { padding: 0 24px; }
@@ -239,11 +271,14 @@
   <div class="corner corner-tl"></div>
   <div class="corner corner-tr"></div>
 
-  <div class="page">
+  <main class="page">
 
     <div class="hero">
       <div class="hero-clock" id="hero-clock"></div>
-      <img id="hero-img" src="images/hero/default.jpg" alt="">
+      <picture>
+        <source id="hero-source" type="image/webp" srcset="images/hero/default.webp">
+        <img id="hero-img" src="images/hero/default.jpg" alt="" width="920" height="471" fetchpriority="high" decoding="async">
+      </picture>
       <div class="hero-caption" id="hero-caption"></div>
     </div>
     <script>
@@ -259,30 +294,35 @@
           'martin-08-11': "Agnes Martin\nUntitled, 1998\nLithograph on Gilclear Light paper\n4 7/10 × 4 7/10 in | 12 × 12 cm\nEdition of 75",
           'bennett-16-19': "Amy Bennett\nNight Gardening, 2022\nOil on panel\n16 x 20 in"
         };
+        const dimensions = {
+          'default': [920, 471],
+          'hockney-23-03': [920, 642],
+          'webster-03-04': [920, 656],
+          'lee-04-05': [920, 959],
+          'hockney-13-15': [920, 517],
+          'hockney-15-16': [920, 510],
+          'lihei-19-21': [920, 640],
+          'martin-08-11': [920, 920],
+          'bennett-16-19': [920, 731]
+        };
         const widthOverrides = { 'lee-04-05': 450 };
 
-        function pickKey(h) {
-          if (h >= 23 || h < 3) return 'hockney-23-03';
-          if (h >= 3 && h < 4) return 'webster-03-04';
-          if (h >= 4 && h < 5) return 'lee-04-05';
-          if (h >= 8 && h < 11) return 'martin-08-11';
-          if (h >= 13 && h < 15) return 'hockney-13-15';
-          if (h >= 15 && h < 16) return 'hockney-15-16';
-          if (h >= 16 && h < 19) return 'bennett-16-19';
-          if (h >= 19 && h < 21) return 'lihei-19-21';
-          return 'default';
-        }
-
         function applySlot(key) {
-          document.getElementById('hero-img').src = 'images/hero/' + key + '.jpg';
+          if (!captions.hasOwnProperty(key)) key = 'default';
+          const img = document.getElementById('hero-img');
+          const src = document.getElementById('hero-source');
+          src.srcset = 'images/hero/' + key + '.webp';
+          img.src = 'images/hero/' + key + '.jpg';
+          const dim = dimensions[key];
+          if (dim) {
+            img.width = dim[0];
+            img.height = dim[1];
+          }
           document.getElementById('hero-caption').textContent = captions[key] || '';
           document.querySelector('.hero').style.maxWidth = (widthOverrides[key] || 460) + 'px';
         }
 
-        const forced = new URLSearchParams(location.search).get('slot');
-        const initialH = new Date().getHours();
-        let key = pickKey(initialH);
-        if (forced && captions.hasOwnProperty(forced)) key = forced;
+        const key = window.__heroKey || 'default';
         applySlot(key);
 
         const clockEl = document.getElementById('hero-clock');
@@ -328,14 +368,14 @@
     </nav>
 
     <div class="footer-quote">
-      <a href="short-talk.html" style="color: #888; text-decoration: underline; text-underline-offset: 3px;">Short Talk on Major and Minor</a>
+      <a href="short-talk.html" style="text-decoration: underline; text-underline-offset: 3px;">Short Talk on Major and Minor</a>
       &nbsp;&middot;&nbsp;
-      <a href="on-education.html" style="color: #888; text-decoration: underline; text-underline-offset: 3px;">On Education</a>
+      <a href="on-education.html" style="text-decoration: underline; text-underline-offset: 3px;">On Education</a>
       &nbsp;&middot;&nbsp;
-      <a href="https://www.brasstacks.blog/solution-production/" style="color: #888; text-decoration: underline; text-underline-offset: 3px;">Solution Production</a>
+      <a href="https://www.brasstacks.blog/solution-production/" style="text-decoration: underline; text-underline-offset: 3px;">Solution Production</a>
     </div>
 
-  </div>
+  </main>
 
 </body>
 </html>
